@@ -1,0 +1,1795 @@
+[
+    {
+        "index": 0,
+        "input_text": "The location of Trane is Swords, Dublin.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Trane",
+                "location",
+                "Swords,_Dublin"
+            ]
+        ],
+        "schema_definition": {
+            "location": "The subject entity is located in the place specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'place of birth': np.float64(0.9093464974501846), 'contains administrative territorial entity': np.float64(0.8735529147687473), 'start time': np.float64(0.8417627932965996)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Trane",
+                "located in the administrative territorial entity",
+                "Swords,_Dublin"
+            ]
+        ]
+    },
+    {
+        "index": 1,
+        "input_text": "The Ciudad Ayala city, a part of Morelos with population density and population of 1604.0 and 1,777,539 respectively, has a UTC offset of -6. The government type of Ciudad Ayala is council-manager government and City Manager is one of the leaders.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Ciudad_Ayala",
+                "populationMetro",
+                "1777539"
+            ],
+            [
+                "Ciudad_Ayala",
+                "leaderTitle",
+                "\"City Manager\""
+            ],
+            [
+                "Ciudad_Ayala",
+                "type",
+                "City"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationDensity",
+                "1604.0"
+            ],
+            [
+                "Ciudad_Ayala",
+                "governmentType",
+                "Council-manager_government"
+            ],
+            [
+                "Ciudad_Ayala",
+                "utcOffset",
+                "\u22126"
+            ],
+            [
+                "Ciudad_Ayala",
+                "isPartOf",
+                "Morelos"
+            ]
+        ],
+        "schema_definition": {
+            "isPartOf": "The subject entity is a part of the entity specified by the object entity.",
+            "utcOffset": "The subject entity has a UTC offset of the value specified by the object entity.",
+            "populationMetro": "The subject entity has a metropolitan population of the number specified by the object entity.",
+            "leaderTitle": "The subject entity has a leader with the title specified by the object entity.",
+            "populationDensity": "The subject entity has a population density of the value specified by the object entity.",
+            "governmentType": "The subject entity has a type of government specified by the object entity.",
+            "type": "The subject entity is of the type specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'contains administrative territorial entity': np.float64(0.8185715704127925), 'located in the administrative territorial entity': np.float64(0.8174684846899789), 'country': np.float64(0.7933762519631709), 'place of birth': np.float64(0.780305055879983), 'contains settlement': np.float64(0.7457651441635899)}, {'contains administrative territorial entity': np.float64(0.7686177064274798), 'located in the administrative territorial entity': np.float64(0.7664941782978139), 'country': np.float64(0.7477974532479208), 'contains settlement': np.float64(0.7402606549914172), 'place of birth': np.float64(0.7390491604577252)}, {'contains administrative territorial entity': np.float64(0.8912377963733981), 'located in the administrative territorial entity': np.float64(0.8860612056594486), 'country': np.float64(0.8657223670477778), 'start time': np.float64(0.8635901956525998), 'contains settlement': np.float64(0.8572409988929623)}, {'populationMetro': np.float64(0.8572340894208351), 'type': np.float64(0.8479688773428796), 'contains administrative territorial entity': np.float64(0.8231058498768538), 'located in the administrative territorial entity': np.float64(0.8153529470369852), 'country': np.float64(0.8139382129938422)}, {'type': np.float64(0.8973248308243529), 'contains administrative territorial entity': np.float64(0.8807285904465563), 'located in the administrative territorial entity': np.float64(0.8549033169281846), 'country': np.float64(0.8431607579265115), 'contains settlement': np.float64(0.8078356305999159)}, {'country': np.float64(0.8205004538937366), 'type': np.float64(0.820263963358074), 'located in the administrative territorial entity': np.float64(0.8028005342010631), 'date of birth': np.float64(0.7952161075729542), 'populationDensity': np.float64(0.7932571021677264)}, {'type': np.float64(0.9502425443891375), 'contains administrative territorial entity': np.float64(0.896048069011596), 'located in the administrative territorial entity': np.float64(0.8831684521623375), 'country': np.float64(0.8567758205154082), 'contains settlement': np.float64(0.8529578488006331)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Ciudad_Ayala",
+                "populationMetro",
+                "1777539"
+            ],
+            [
+                "Ciudad_Ayala",
+                "leaderTitle",
+                "\"City Manager\""
+            ],
+            [
+                "Ciudad_Ayala",
+                "type",
+                "City"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationDensity",
+                "1604.0"
+            ],
+            [
+                "Ciudad_Ayala",
+                "type",
+                "Council-manager_government"
+            ],
+            [
+                "Ciudad_Ayala",
+                "utcOffset",
+                "\u22126"
+            ],
+            [
+                "Ciudad_Ayala",
+                "located in the administrative territorial entity",
+                "Morelos"
+            ]
+        ]
+    },
+    {
+        "index": 2,
+        "input_text": "The 17068.8 millimeter long ALCO RS-3 has a diesel-electric transmission.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "ALCO_RS-3",
+                "length",
+                "17068.8 (millimetres)"
+            ],
+            [
+                "ALCO_RS-3",
+                "powerType",
+                "Diesel-electric_transmission"
+            ]
+        ],
+        "schema_definition": {
+            "length": "The subject entity has a length of the value specified by the object entity.",
+            "powerType": "The subject entity has the power type specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.850386573172128), 'populationDensity': np.float64(0.8261394241456772), 'utcOffset': np.float64(0.8228658853420535), 'contains administrative territorial entity': np.float64(0.8022505515099896), 'located in the administrative territorial entity': np.float64(0.7967935119202103)}, {'type': np.float64(0.9082164946278188), 'contains administrative territorial entity': np.float64(0.8306443190204716), 'located in the administrative territorial entity': np.float64(0.8144934412097252), 'length': np.float64(0.8016078481141179), 'leaderTitle': np.float64(0.7993496823494155)}]",
+        "schema_canonicalizaiton": [
+            [
+                "ALCO_RS-3",
+                "length",
+                "17068.8 (millimetres)"
+            ],
+            [
+                "ALCO_RS-3",
+                "powerType",
+                "Diesel-electric_transmission"
+            ]
+        ]
+    },
+    {
+        "index": 3,
+        "input_text": "Alan B. Miller Hall, in Virginia, USA, was designed by Robert A.M. Stern. The address of the hall is \"101 Ukrop Way\" and the current tenants are the Mason School of Business.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Alan_B._Miller_Hall",
+                "architect",
+                "Robert_A._M._Stern"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "currentTenants",
+                "Mason_School_of_Business"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "location",
+                "Virginia"
+            ],
+            [
+                "Mason_School_of_Business",
+                "country",
+                "United_States"
+            ]
+        ],
+        "schema_definition": {
+            "architect": "The subject entity was designed by the architect specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity.",
+            "address": "The subject entity has the address specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "currentTenants": "The subject entity is currently occupied by the tenant specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.8346240300482086), 'place of birth': np.float64(0.7999556076760574), 'contains administrative territorial entity': np.float64(0.7956523373292508), 'start time': np.float64(0.7918662691062021), 'located in the administrative territorial entity': np.float64(0.7908985527277024)}, {'located in the administrative territorial entity': np.float64(0.8927757181590665), 'type': np.float64(0.8847716326006081), 'contains administrative territorial entity': np.float64(0.8721533405751144), 'country': np.float64(0.8669783277386894), 'place of birth': np.float64(0.8611835971898123)}, {'type': np.float64(0.8575002274810358), 'located in the administrative territorial entity': np.float64(0.8420784788820955), 'address': np.float64(0.8399211040658414), 'contains administrative territorial entity': np.float64(0.8314330162954293), 'place of birth': np.float64(0.794954883158838)}, {'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.9030858728495403)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Alan_B._Miller_Hall",
+                "architect",
+                "Robert_A._M._Stern"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "currentTenants",
+                "Mason_School_of_Business"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "located in the administrative territorial entity",
+                "Virginia"
+            ],
+            [
+                "Mason_School_of_Business",
+                "country",
+                "United_States"
+            ]
+        ]
+    },
+    {
+        "index": 4,
+        "input_text": "Liselotte Grschebina was born in Karlsruhe and died in Israel. Ethnic groups in Israel include Arabs.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Liselotte_Grschebina",
+                "bornIn",
+                "Karlsruhe"
+            ],
+            [
+                "Liselotte_Grschebina",
+                "diedIn",
+                "Israel"
+            ],
+            [
+                "Israel",
+                "ethnicGroup",
+                "Arabs"
+            ]
+        ],
+        "schema_definition": {
+            "bornIn": "The subject entity was born in the location specified by the object entity.",
+            "ethnicGroup": "The subject entity contains the ethnic group specified by the object entity.",
+            "diedIn": "The subject entity died in the location specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'place of birth': np.float64(1.0000000205114885), 'date of birth': np.float64(0.89536171017276), 'start time': np.float64(0.8729783385652263), 'located in the administrative territorial entity': np.float64(0.868446941852001), 'country': np.float64(0.8629665140786436)}, {'place of death': np.float64(0.9999999940723615), 'date of death': np.float64(0.9053482157258043), 'place of birth': np.float64(0.8047177650936224), 'located in the administrative territorial entity': np.float64(0.7763343290773883), 'type': np.float64(0.7672758421823046)}, {'type': np.float64(0.843977691176805), 'contains administrative territorial entity': np.float64(0.8079437879001965), 'country': np.float64(0.8014904631708584), 'located in the administrative territorial entity': np.float64(0.7909609261579886), 'powerType': np.float64(0.7904295770992051)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Liselotte_Grschebina",
+                "place of birth",
+                "Karlsruhe"
+            ],
+            [
+                "Liselotte_Grschebina",
+                "place of death",
+                "Israel"
+            ],
+            [
+                "Israel",
+                "ethnicGroup",
+                "Arabs"
+            ]
+        ]
+    },
+    {
+        "index": 5,
+        "input_text": "Agremia\u00e7\u00e3o Sportiva Arapiraquense managed by Vica has 17000 members and play in the Campeonato Brasileiro S\u00e9rie C league which is from Brazil.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Campeonato_Brasileiro_S\u00e9rie_C",
+                "country",
+                "Brazil"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "numberOfMembers",
+                "17000"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "manager",
+                "Vica"
+            ]
+        ],
+        "schema_definition": {
+            "league": "The subject entity plays in the league specified by the object entity.",
+            "manager": "The subject entity is managed by the person specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity.",
+            "numberOfMembers": "The subject entity has the number of members specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.7993442158027714), 'powerType': np.float64(0.7650689708522762), 'located in the administrative territorial entity': np.float64(0.7543877423998793), 'currentTenants': np.float64(0.7512767999564374), 'start time': np.float64(0.7511139330952137)}, {}, {'type': np.float64(0.8610967355696622), 'length': np.float64(0.8457452744287492), 'populationMetro': np.float64(0.8339958345241683), 'address': np.float64(0.8304681006916721), 'populationDensity': np.float64(0.8271381358047778)}, {'type': np.float64(0.8984920053452388), 'currentTenants': np.float64(0.8583686956922699), 'leaderTitle': np.float64(0.845792273934612), 'powerType': np.float64(0.843469592032829), 'located in the administrative territorial entity': np.float64(0.8391627311604597)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Campeonato_Brasileiro_S\u00e9rie_C",
+                "country",
+                "Brazil"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "numberOfMembers",
+                "17000"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "manager",
+                "Vica"
+            ]
+        ]
+    },
+    {
+        "index": 6,
+        "input_text": "Bananaman first aired on the 10th of March, 1983 and was created by Steve Bright. It was broadcast by the BBC.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bananaman",
+                "firstAired",
+                "1983-03-10"
+            ],
+            [
+                "Bananaman",
+                "creator",
+                "Steve_Bright"
+            ],
+            [
+                "Bananaman",
+                "broadcaster",
+                "BBC"
+            ]
+        ],
+        "schema_definition": {
+            "firstAired": "The subject entity was first broadcast or aired on the date specified by the object entity.",
+            "creator": "The subject entity was created by the person or entity specified by the object entity.",
+            "broadcaster": "The subject entity was broadcast by the entity specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'start time': np.float64(0.8565810934294574), 'date of birth': np.float64(0.8509511237574334), 'type': np.float64(0.7804890312908711), 'place of birth': np.float64(0.7761760907622032), 'date of death': np.float64(0.7689262585119937)}, {'type': np.float64(0.9086943259607524), 'manager': np.float64(0.8966640677303134), 'place of birth': np.float64(0.8870590006293767), 'start time': np.float64(0.8787107699630854), 'architect': np.float64(0.8687883922683509)}, {'type': np.float64(0.8964536304088211), 'creator': np.float64(0.864074047968266), 'address': np.float64(0.8463681850802709), 'start time': np.float64(0.8456843269723576), 'manager': np.float64(0.8325962662235058)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bananaman",
+                "start time",
+                "1983-03-10"
+            ],
+            [
+                "Bananaman",
+                "creator",
+                "Steve_Bright"
+            ],
+            [
+                "Bananaman",
+                "broadcaster",
+                "BBC"
+            ]
+        ]
+    },
+    {
+        "index": 7,
+        "input_text": "The 11th Mississippi Infantry Monument, built in 2000, is placed in the municipality of Gettysburg in Pennsylvania which is in Adams County, USA. The 11th Mississippi Infantry Monument is classified as a Contributing Property. Cumberland county, Pennsylvania is to the north of Adams County.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "locatedIn",
+                "Gettysburg"
+            ],
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "yearOfConstruction",
+                "2000"
+            ],
+            [
+                "Gettysburg",
+                "locatedIn",
+                "Pennsylvania"
+            ],
+            [
+                "Pennsylvania",
+                "locatedIn",
+                "Adams_County"
+            ],
+            [
+                "Adams_County",
+                "country",
+                "USA"
+            ],
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "category",
+                "Contributing_Property"
+            ],
+            [
+                "Adams_County",
+                "northOf",
+                "Cumberland_County"
+            ]
+        ],
+        "schema_definition": {
+            "yearOfConstruction": "The subject entity was constructed or built in the year specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity.",
+            "northOf": "The subject entity is located to the north of the location specified by the object entity.",
+            "category": "The subject entity belongs to the category specified by the object entity.",
+            "locatedIn": "The subject entity is located in the place specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.9030858728495403)}, {'start time': np.float64(0.8662333114973637), 'date of birth': np.float64(0.8560575299608255), 'creator': np.float64(0.8495836971387044), 'place of birth': np.float64(0.8352710304858227), 'architect': np.float64(0.8348420349691056)}, {'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.9030858728495403)}, {'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.9030858728495403)}, {}, {'type': np.float64(0.8958617236232597), 'manager': np.float64(0.8593745812845723), 'contains administrative territorial entity': np.float64(0.8509976031665162), 'located in the administrative territorial entity': np.float64(0.8451214404020955), 'address': np.float64(0.8292064014436236)}, {'located in the administrative territorial entity': np.float64(0.8528144827971541), 'country': np.float64(0.8303381134311795), 'address': np.float64(0.8249160769946446), 'place of birth': np.float64(0.8176443544462568), 'contains administrative territorial entity': np.float64(0.7906921297699017)}]",
+        "schema_canonicalizaiton": [
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "located in the administrative territorial entity",
+                "Gettysburg"
+            ],
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "yearOfConstruction",
+                "2000"
+            ],
+            [
+                "Gettysburg",
+                "located in the administrative territorial entity",
+                "Pennsylvania"
+            ],
+            [
+                "Pennsylvania",
+                "located in the administrative territorial entity",
+                "Adams_County"
+            ],
+            [
+                "Adams_County",
+                "country",
+                "USA"
+            ],
+            [
+                "11th_Mississippi_Infantry_Monument",
+                "type",
+                "Contributing_Property"
+            ],
+            [
+                "Adams_County",
+                "northOf",
+                "Cumberland_County"
+            ]
+        ]
+    },
+    {
+        "index": 8,
+        "input_text": "The government type in France is unitary state.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "France",
+                "governmentType",
+                "Unitary_state"
+            ]
+        ],
+        "schema_definition": {
+            "governmentType": "The subject entity has the type of government specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.8969222585273435), 'contains administrative territorial entity': np.float64(0.8799510540136485), 'powerType': np.float64(0.8773150385495001), 'located in the administrative territorial entity': np.float64(0.8487916428223575), 'manager': np.float64(0.8436343146213099)}]",
+        "schema_canonicalizaiton": [
+            [
+                "France",
+                "type",
+                "Unitary_state"
+            ]
+        ]
+    },
+    {
+        "index": 9,
+        "input_text": "The College of William and Mary is the owner of the Alan B. Miller Hall, located in Virginia at 101 Ukrop Way and currently occupied by the Mason School of Business.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "College_of_William_and_Mary",
+                "owner",
+                "Alan_B._Miller_Hall"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "location",
+                "Virginia"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "currentTenants",
+                "Mason_School_of_Business"
+            ]
+        ],
+        "schema_definition": {
+            "Here are the descriptions for each relation": "",
+            "address": "The subject entity has the address specified by the object entity.",
+            "currentTenants": "The subject entity is currently occupied by the tenant specified by the object entity.",
+            "owner": "The subject entity is owned by the entity specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.932441069666316), 'manager': np.float64(0.9156036267737194), 'creator': np.float64(0.8933703233114777), 'currentTenants': np.float64(0.8824948039322646), 'contains administrative territorial entity': np.float64(0.8766694036676878)}, {'located in the administrative territorial entity': np.float64(0.9374531582043558), 'country': np.float64(0.9132784191318469), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.9030858728495403)}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "College_of_William_and_Mary",
+                "owner",
+                "Alan_B._Miller_Hall"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "located in the administrative territorial entity",
+                "Virginia"
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "Alan_B._Miller_Hall",
+                "currentTenants",
+                "Mason_School_of_Business"
+            ]
+        ]
+    },
+    {
+        "index": 10,
+        "input_text": "Al Asad Airbase is operated by the United States Air Force and has a runway length of 3,990.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Al_Asad_Airbase",
+                "operator",
+                "United_States_Air_Force"
+            ],
+            [
+                "Al_Asad_Airbase",
+                "runwayLength",
+                "3990"
+            ]
+        ],
+        "schema_definition": {
+            "operator": "The subject entity is operated by the entity specified by the object entity.",
+            "runwayLength": "The subject entity has a runway with the length specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'owner': np.float64(0.9546158922846175), 'type': np.float64(0.9501088758053874), 'manager': np.float64(0.9304974710009066), 'creator': np.float64(0.9088991747478192), 'broadcaster': np.float64(0.8948000153815522)}, {'length': np.float64(0.8582865110174166), 'type': np.float64(0.7847834105625586), 'numberOfMembers': np.float64(0.7712895745618527), 'operator': np.float64(0.7683317298099828), 'address': np.float64(0.7639067801480963)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Al_Asad_Airbase",
+                "operator",
+                "United_States_Air_Force"
+            ],
+            [
+                "Al_Asad_Airbase",
+                "length",
+                "3990"
+            ]
+        ]
+    },
+    {
+        "index": 11,
+        "input_text": "Born in New Hampshire on November 18th 1923 and dying in California, Alan Shepard was a US national who was selected by NASA in 1959.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Alan_Shepard",
+                "birthPlace",
+                "New_Hampshire"
+            ],
+            [
+                "Alan_Shepard",
+                "birthDate",
+                "1923-11-18"
+            ],
+            [
+                "Alan_Shepard",
+                "deathPlace",
+                "California"
+            ],
+            [
+                "Alan_Shepard",
+                "nationality",
+                "United_States"
+            ],
+            [
+                "Alan_Shepard",
+                "employer",
+                "NASA"
+            ],
+            [
+                "Alan_Shepard",
+                "selectionYear",
+                "1959"
+            ]
+        ],
+        "schema_definition": {
+            "Here are the descriptions for each relation": "",
+            "birthPlace": "The subject entity was born in the location specified by the object entity.",
+            "birthDate": "The subject entity was born on the date specified by the object entity.",
+            "deathPlace": "The subject entity died in the location specified by the object entity.",
+            "nationality": "The subject entity has the nationality specified by the object entity.",
+            "employer": "The subject entity is employed by the organization specified by the object entity.",
+            "selectionYear": "The subject entity was selected or chosen in the year specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'place of birth': np.float64(1.0000000205114885), 'date of birth': np.float64(0.89536171017276), 'creator': np.float64(0.8870590006293767), 'start time': np.float64(0.8729783385652263), 'located in the administrative territorial entity': np.float64(0.868446941852001)}, {'date of birth': np.float64(0.999999873701222), 'place of birth': np.float64(0.89536171017276), 'start time': np.float64(0.8654385429150397), 'yearOfConstruction': np.float64(0.8560575299608255), 'creator': np.float64(0.8540623073727258)}, {'place of death': np.float64(0.9999999940723615), 'date of death': np.float64(0.9053482157258043), 'place of birth': np.float64(0.8047177650936224), 'located in the administrative territorial entity': np.float64(0.7763343290773883), 'broadcaster': np.float64(0.7712710520679712)}, {'ethnicGroup': np.float64(0.9003133701638709), 'type': np.float64(0.8928766457140898), 'country': np.float64(0.8875469527143116), 'contains administrative territorial entity': np.float64(0.8564687617501815), 'located in the administrative territorial entity': np.float64(0.8499779211898064)}, {'operator': np.float64(0.9368306604750749), 'owner': np.float64(0.9102343802992958), 'type': np.float64(0.9024950263924225), 'manager': np.float64(0.8973329866372046), 'creator': np.float64(0.8754883726624036)}, {'yearOfConstruction': np.float64(0.9089679710800913), 'start time': np.float64(0.8300411371741714), 'date of birth': np.float64(0.8284878434775979), 'type': np.float64(0.8124222700397428), 'creator': np.float64(0.8085035462960263)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Alan_Shepard",
+                "place of birth",
+                "New_Hampshire"
+            ],
+            [
+                "Alan_Shepard",
+                "date of birth",
+                "1923-11-18"
+            ],
+            [
+                "Alan_Shepard",
+                "place of death",
+                "California"
+            ],
+            [
+                "Alan_Shepard",
+                "nationality",
+                "United_States"
+            ],
+            [
+                "Alan_Shepard",
+                "employer",
+                "NASA"
+            ],
+            [
+                "Alan_Shepard",
+                "selectionYear",
+                "1959"
+            ]
+        ]
+    },
+    {
+        "index": 12,
+        "input_text": "Morelos is a state in the country or Mexico.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Morelos",
+                "location",
+                "Mexico"
+            ],
+            [
+                "Morelos",
+                "type",
+                "state"
+            ]
+        ],
+        "schema_definition": {
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "type": "The subject entity is of the type specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Morelos",
+                "country",
+                "Mexico"
+            ],
+            [
+                "Morelos",
+                "type",
+                "state"
+            ]
+        ]
+    },
+    {
+        "index": 13,
+        "input_text": "Nie Haisheng was a fighter pilot from the People's Republic of China who was born in Hubei, Zaoyang on October 13, 1964.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Nie_Haisheng",
+                "occupation",
+                "Fighter_pilot"
+            ],
+            [
+                "Nie_Haisheng",
+                "country",
+                "People's_Republic_of_China"
+            ],
+            [
+                "Nie_Haisheng",
+                "birthDate",
+                "October_13,_1964"
+            ],
+            [
+                "Nie_Haisheng",
+                "birthPlace",
+                "Zaoyang,_Hubei"
+            ]
+        ],
+        "schema_definition": {
+            "occupation": "The subject entity has the occupation specified by the object entity.",
+            "country": "The subject entity is associated with the country specified by the object entity.",
+            "birthPlace": "The subject entity was born in the place specified by the object entity.",
+            "birthDate": "The subject entity was born on the date specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'operator': np.float64(0.9171627727616258), 'type': np.float64(0.9127947905259045), 'owner': np.float64(0.895199911123902), 'nationality': np.float64(0.8927813623135712), 'manager': np.float64(0.8922174364649562)}, {}, {'date of birth': np.float64(0.9999998737012223), 'place of birth': np.float64(0.8953617101727599), 'start time': np.float64(0.8654385429150397), 'yearOfConstruction': np.float64(0.8560575299608255), 'creator': np.float64(0.8540623073727258)}, {'place of birth': np.float64(0.989852839636309), 'date of birth': np.float64(0.8963673805376764), 'creator': np.float64(0.8928575672872694), 'start time': np.float64(0.880034031626695), 'located in the administrative territorial entity': np.float64(0.8629295978269598)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Nie_Haisheng",
+                "occupation",
+                "Fighter_pilot"
+            ],
+            [
+                "Nie_Haisheng",
+                "country",
+                "People's_Republic_of_China"
+            ],
+            [
+                "Nie_Haisheng",
+                "date of birth",
+                "October_13,_1964"
+            ],
+            [
+                "Nie_Haisheng",
+                "place of birth",
+                "Zaoyang,_Hubei"
+            ]
+        ]
+    },
+    {
+        "index": 14,
+        "input_text": "Bedford Aerodrome operated by MotorSport Vision has EGBF as its ICAO location identifier.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bedford_Aerodrome",
+                "operator",
+                "MotorSport_Vision"
+            ],
+            [
+                "Bedford_Aerodrome",
+                "ICAO_location_identifier",
+                "EGBF"
+            ]
+        ],
+        "schema_definition": {
+            "operator": "The subject entity is operated by the entity specified by the object entity.",
+            "ICAO_location_identifier": "The subject entity has the ICAO location identifier specified by the object entity."
+        },
+        "canonicalization_candidates": "[{}, {'located in the administrative territorial entity': np.float64(0.8646925732996205), 'address': np.float64(0.8538129068341308), 'country': np.float64(0.8492840361407223), 'contains administrative territorial entity': np.float64(0.8269425889164985), 'nationality': np.float64(0.8165564995658143)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bedford_Aerodrome",
+                "operator",
+                "MotorSport_Vision"
+            ],
+            [
+                "Bedford_Aerodrome",
+                "ICAO_location_identifier",
+                "EGBF"
+            ]
+        ]
+    },
+    {
+        "index": 15,
+        "input_text": "Adolfo Suarez Madrid-Barajas airport is located at Paracuellos de Jarama, is operated by ENAIRE and is 610 metres above sea level. It also has a 3500 long runway.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "location",
+                "Paracuellos_de_Jarama"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "operator",
+                "ENAIRE"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "elevationAboveSeaLevel",
+                "610 metres"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "runwayLength",
+                "3500"
+            ]
+        ],
+        "schema_definition": {
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "operator": "The subject entity is operated by the entity specified by the object entity.",
+            "elevationAboveSeaLevel": "The subject entity has an elevation above sea level that is specified by the object entity.",
+            "runwayLength": "The subject entity has a runway with the length specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {'located in the administrative territorial entity': np.float64(0.8028251259500903), 'country': np.float64(0.7930722676137122), 'contains administrative territorial entity': np.float64(0.7877503734573066), 'address': np.float64(0.7839240648268625), 'occupation': np.float64(0.7824035363258746)}, {'length': np.float64(0.8582865110174167), 'occupation': np.float64(0.7849572931789245), 'type': np.float64(0.7847834105625586), 'ICAO_location_identifier': np.float64(0.7795473087640585), 'numberOfMembers': np.float64(0.7712895745618527)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "located in the administrative territorial entity",
+                "Paracuellos_de_Jarama"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "operator",
+                "ENAIRE"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "elevationAboveSeaLevel",
+                "610 metres"
+            ],
+            [
+                "Adolfo_Suarez_Madrid-Barajas_Airport",
+                "length",
+                "3500"
+            ]
+        ]
+    },
+    {
+        "index": 16,
+        "input_text": "The Estadio Municipal Coaracy da Mata Fonseca in Arapiraca is the ground of Agremia\u00e7\u00e3o Sportiva Arapiraquense (which has 17000 members) that play in the Campeonato Brasileiro S\u00e9rie C league. Champions, The Vila Nova Futebol Clube at Campeonato Brasileiro S\u00e9rie C from Brazil.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Estadio_Municipal_Coaracy_da_Mata_Fonseca",
+                "location",
+                "Arapiraca"
+            ],
+            [
+                "Estadio_Municipal_Coaracy_da_Mata_Fonseca",
+                "groundOf",
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "numberOfMembers",
+                "17000"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Vila_Nova_Futebol_Clube",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Campeonato_Brasileiro_S\u00e9rie_C",
+                "country",
+                "Brazil"
+            ]
+        ],
+        "schema_definition": {
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "groundOf": "The subject entity is the home ground or stadium of the sports team specified by the object entity.",
+            "numberOfMembers": "The subject entity has the number of members specified by the object entity.",
+            "league": "The subject entity participates in the league specified by the object entity.",
+            "country": "The subject entity is associated with the country specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {'league': np.float64(0.8100870449019406), 'employer': np.float64(0.7975895641043923), 'located in the administrative territorial entity': np.float64(0.7945899047661757), 'address': np.float64(0.7872501766777456), 'type': np.float64(0.7865418727178148)}, {}, {}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Estadio_Municipal_Coaracy_da_Mata_Fonseca",
+                "located in the administrative territorial entity",
+                "Arapiraca"
+            ],
+            [
+                "Estadio_Municipal_Coaracy_da_Mata_Fonseca",
+                "groundOf",
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "numberOfMembers",
+                "17000"
+            ],
+            [
+                "Agremia\u00e7\u00e3o_Sportiva_Arapiraquense",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Vila_Nova_Futebol_Clube",
+                "league",
+                "Campeonato_Brasileiro_S\u00e9rie_C"
+            ],
+            [
+                "Campeonato_Brasileiro_S\u00e9rie_C",
+                "country",
+                "Brazil"
+            ]
+        ]
+    },
+    {
+        "index": 17,
+        "input_text": "The Acharya Institute of Technology, affiliated with Visvesvaraya Technological University, is located in Belgaum, India.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Acharya_Institute_of_Technology",
+                "affiliatedWith",
+                "Visvesvaraya_Technological_University"
+            ],
+            [
+                "Acharya_Institute_of_Technology",
+                "location",
+                "Belgaum"
+            ],
+            [
+                "Belgaum",
+                "country",
+                "India"
+            ]
+        ],
+        "schema_definition": {
+            "affiliatedWith": "The subject entity is affiliated with the organization or institution specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'employer': np.float64(0.9296503271996286), 'operator': np.float64(0.8955182836349558), 'type': np.float64(0.8916892918154005), 'owner': np.float64(0.8908824859788842), 'located in the administrative territorial entity': np.float64(0.8659716731481545)}, {'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Acharya_Institute_of_Technology",
+                "affiliatedWith",
+                "Visvesvaraya_Technological_University"
+            ],
+            [
+                "Acharya_Institute_of_Technology",
+                "located in the administrative territorial entity",
+                "Belgaum"
+            ],
+            [
+                "Belgaum",
+                "country",
+                "India"
+            ]
+        ]
+    },
+    {
+        "index": 18,
+        "input_text": "The Baku Turkish Martyrs' Memorial is located in Azerbaijan, where Artur Rasizade was a leader.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Azerbaijan",
+                "leader",
+                "Artur_Rasizade"
+            ]
+        ],
+        "schema_definition": {
+            "leader": "The subject entity has the person specified by the object entity as its leader."
+        },
+        "canonicalization_candidates": "[{'leaderTitle': np.float64(0.9367607354547434), 'manager': np.float64(0.9099932952252574), 'owner': np.float64(0.8500777012531273), 'operator': np.float64(0.8488684269621041), 'creator': np.float64(0.8444414577531728)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Azerbaijan",
+                "leader",
+                "Artur_Rasizade"
+            ]
+        ]
+    },
+    {
+        "index": 19,
+        "input_text": "Bionico, a food found in Mexico, is a dish served for dessert.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bionico",
+                "cuisine",
+                "Mexico"
+            ],
+            [
+                "Bionico",
+                "dishServedAs",
+                "Dessert"
+            ]
+        ],
+        "schema_definition": {
+            "cuisine": "The subject entity is a part of the cuisine specified by the object entity.",
+            "dishServedAs": "The subject entity is a dish that is served as the meal specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.8788507330660129), 'operator': np.float64(0.8734839406077834), 'owner': np.float64(0.8649297327083653), 'occupation': np.float64(0.8527952306086422), 'employer': np.float64(0.8511334791986559)}, {'type': np.float64(0.8450587390076248), 'operator': np.float64(0.8391614079234428), 'owner': np.float64(0.8224134324517338), 'occupation': np.float64(0.810373756577238), 'employer': np.float64(0.8020028338110619)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bionico",
+                "type",
+                "Mexico"
+            ],
+            [
+                "Bionico",
+                "type",
+                "Dessert"
+            ]
+        ]
+    },
+    {
+        "index": 20,
+        "input_text": "Aaron Turner is a singer who started performing in 1995 and played with the band, Twilight.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Aaron_Turner",
+                "occupation",
+                "Singer"
+            ],
+            [
+                "Aaron_Turner",
+                "memberOf",
+                "Twilight"
+            ],
+            [
+                "Aaron_Turner",
+                "activeStartDate",
+                "1995"
+            ]
+        ],
+        "schema_definition": {
+            "occupation": "The subject entity has the occupation specified by the object entity.",
+            "activeStartDate": "The subject entity became active or started its activity on the date specified by the object entity.",
+            "memberOf": "The subject entity is a member of the organization or group specified by the object entity."
+        },
+        "canonicalization_candidates": "[{}, {'employer': np.float64(0.9327232012187797), 'affiliatedWith': np.float64(0.9305168055009463), 'type': np.float64(0.8980781923153134), 'operator': np.float64(0.8939199833413758), 'owner': np.float64(0.8874911130525608)}, {'start time': np.float64(0.8631611081167787), 'date of birth': np.float64(0.8545131449443719), 'yearOfConstruction': np.float64(0.7977336101855759), 'broadcaster': np.float64(0.7934084543471628), 'operator': np.float64(0.7923173646395099)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Aaron_Turner",
+                "occupation",
+                "Singer"
+            ],
+            [
+                "Aaron_Turner",
+                "affiliatedWith",
+                "Twilight"
+            ],
+            [
+                "Aaron_Turner",
+                "start time",
+                "1995"
+            ]
+        ]
+    },
+    {
+        "index": 21,
+        "input_text": "Bananaman, which was broadcasted by STV, was first aired on 10/03/1983.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bananaman",
+                "broadcaster",
+                "STV"
+            ],
+            [
+                "Bananaman",
+                "firstAired",
+                "1983-03-10"
+            ]
+        ],
+        "schema_definition": {
+            "broadcaster": "The subject entity is broadcasted by the entity specified by the object entity.",
+            "firstAired": "The subject entity was first aired on the date specified by the object entity."
+        },
+        "canonicalization_candidates": "[{}, {'start time': np.float64(0.8712783813140592), 'date of birth': np.float64(0.8682471675188641), 'broadcaster': np.float64(0.850148060364788), 'yearOfConstruction': np.float64(0.7981484858052883), 'place of birth': np.float64(0.7864840023147515)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bananaman",
+                "broadcaster",
+                "STV"
+            ],
+            [
+                "Bananaman",
+                "firstAired",
+                "1983-03-10"
+            ]
+        ]
+    },
+    {
+        "index": 22,
+        "input_text": "Founded on January 1, 2001, Hypermarcas is a pharmaceutical company that makes healthcare products and sells cosmetics.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Hypermarcas",
+                "industry",
+                "Pharmaceutical"
+            ],
+            [
+                "Hypermarcas",
+                "foundingDate",
+                "2001-01-01"
+            ],
+            [
+                "Hypermarcas",
+                "product",
+                "Healthcare_products"
+            ],
+            [
+                "Hypermarcas",
+                "product",
+                "Cosmetics"
+            ]
+        ],
+        "schema_definition": {
+            "industry": "The subject entity operates in the industry specified by the object entity.",
+            "foundingDate": "The subject entity was established or founded on the date specified by the object entity.",
+            "product": "The subject entity produces or offers the product specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'operator': np.float64(0.9237855000231394), 'employer': np.float64(0.9174495133403446), 'occupation': np.float64(0.9042079531203654), 'owner': np.float64(0.891659133559543), 'type': np.float64(0.8889256284135753)}, {'date of birth': np.float64(0.9189732250344892), 'start time': np.float64(0.9082455248141192), 'yearOfConstruction': np.float64(0.8897191049962552), 'firstAired': np.float64(0.880414738639864), 'creator': np.float64(0.8615682989379624)}, {'operator': np.float64(0.8522584051143733), 'type': np.float64(0.8335193423147212), 'owner': np.float64(0.8324857431131394), 'employer': np.float64(0.8218722074032064), 'creator': np.float64(0.8182364069198234)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Hypermarcas",
+                "type",
+                "Pharmaceutical"
+            ],
+            [
+                "Hypermarcas",
+                "foundingDate",
+                "2001-01-01"
+            ],
+            [
+                "Hypermarcas",
+                "product",
+                "Healthcare_products"
+            ],
+            [
+                "Hypermarcas",
+                "product",
+                "Cosmetics"
+            ]
+        ]
+    },
+    {
+        "index": 23,
+        "input_text": "The Mason School of Business is located in Virginia in the United States and is based at The Alan B Miller Hall on 101 Ukrop Way. The building was designed by architect Robert A.M. Stern.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Mason_School_of_Business",
+                "location",
+                "Virginia"
+            ],
+            [
+                "Mason_School_of_Business",
+                "country",
+                "United_States"
+            ],
+            [
+                "Mason_School_of_Business",
+                "location",
+                "The_Alan_B_Miller_Hall"
+            ],
+            [
+                "The_Alan_B_Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "The_Alan_B_Miller_Hall",
+                "architect",
+                "Robert_A._M._Stern"
+            ]
+        ],
+        "schema_definition": {
+            "address": "The subject entity has the address specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity.",
+            "architect": "The subject entity was designed by the architect specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Mason_School_of_Business",
+                "located in the administrative territorial entity",
+                "Virginia"
+            ],
+            [
+                "Mason_School_of_Business",
+                "country",
+                "United_States"
+            ],
+            [
+                "Mason_School_of_Business",
+                "address",
+                "The_Alan_B_Miller_Hall"
+            ],
+            [
+                "The_Alan_B_Miller_Hall",
+                "address",
+                "\"101 Ukrop Way\""
+            ],
+            [
+                "The_Alan_B_Miller_Hall",
+                "architect",
+                "Robert_A._M._Stern"
+            ]
+        ]
+    },
+    {
+        "index": 24,
+        "input_text": "Bionico is a dessert food made from chopped fruits, sour cream, condensed milk, granola, shredded coconut and raisins. This dish can be found in Mexico, a country that is inhabited by Mexicans and uses the peso as its currency.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bionico",
+                "ingredient",
+                "chopped_fruits"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "sour_cream"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "condensed_milk"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "granola"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "shredded_coconut"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "raisins"
+            ],
+            [
+                "Bionico",
+                "cuisine",
+                "Mexico"
+            ],
+            [
+                "Mexico",
+                "currency",
+                "Peso"
+            ],
+            [
+                "Mexico",
+                "demonym",
+                "Mexican"
+            ]
+        ],
+        "schema_definition": {
+            "ingredient": "The subject entity contains the ingredient specified by the object entity.",
+            "cuisine": "The subject entity is part of the cuisine specified by the object entity.",
+            "demonym": "The subject entity has the demonym specified by the object entity.",
+            "currency": "The subject entity uses the currency specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'type': np.float64(0.8602052418269536), 'contains administrative territorial entity': np.float64(0.843370186627855), 'operator': np.float64(0.8402858395328787), 'occupation': np.float64(0.8353337152447431), 'owner': np.float64(0.8350971280567487)}, {}, {}, {}, {}, {}, {'ingredient': np.float64(0.9099822193710202), 'type': np.float64(0.8699248220350888), 'operator': np.float64(0.8651328594198857), 'owner': np.float64(0.8579764997907058), 'occupation': np.float64(0.8505558505555463)}, {'type': np.float64(0.8355522293066475), 'owner': np.float64(0.8311831114182721), 'utcOffset': np.float64(0.8284940876163251), 'operator': np.float64(0.8248122857649995), 'nationality': np.float64(0.8222847702691443)}, {'type': np.float64(0.8964413596625544), 'operator': np.float64(0.8905756701303564), 'owner': np.float64(0.8832602969147325), 'occupation': np.float64(0.8696218264678288), 'employer': np.float64(0.8592197689663794)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bionico",
+                "ingredient",
+                "chopped_fruits"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "sour_cream"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "condensed_milk"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "granola"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "shredded_coconut"
+            ],
+            [
+                "Bionico",
+                "ingredient",
+                "raisins"
+            ],
+            [
+                "Bionico",
+                "cuisine",
+                "Mexico"
+            ],
+            [
+                "Mexico",
+                "currency",
+                "Peso"
+            ],
+            [
+                "Mexico",
+                "demonym",
+                "Mexican"
+            ]
+        ]
+    },
+    {
+        "index": 25,
+        "input_text": "Nie Haisheng was born on October 13, 1964 and is from the People\u2019s Republic of China. Haisheng worked as a fighter pilot and was apart of the Shenzhou 10 mission and also took part in the Shenzhou 6 mission.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Nie_Haisheng",
+                "dateOfBirth",
+                "October 13, 1964"
+            ],
+            [
+                "Nie_Haisheng",
+                "nationality",
+                "People\u2019s_Republic_of_China"
+            ],
+            [
+                "Nie_Haisheng",
+                "occupation",
+                "fighter_pilot"
+            ],
+            [
+                "Nie_Haisheng",
+                "mission",
+                "Shenzhou_10_mission"
+            ],
+            [
+                "Nie_Haisheng",
+                "mission",
+                "Shenzhou_6_mission"
+            ]
+        ],
+        "schema_definition": {
+            "dateOfBirth": "The subject entity was born on the date specified by the object entity.",
+            "nationality": "The subject entity has the nationality specified by the object entity.",
+            "occupation": "The subject entity has the occupation specified by the object entity.",
+            "mission": "The subject entity participated in the mission specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'date of birth': np.float64(0.9999998737012223), 'foundingDate': np.float64(0.9189732250344891), 'place of birth': np.float64(0.8953617101727599), 'firstAired': np.float64(0.8682471675188641), 'start time': np.float64(0.8654385429150397)}, {}, {}, {'operator': np.float64(0.8556296776489729), 'employer': np.float64(0.8489145322171769), 'type': np.float64(0.8392254998437314), 'occupation': np.float64(0.8311416564308272), 'affiliatedWith': np.float64(0.8264310478951961)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Nie_Haisheng",
+                "date of birth",
+                "October 13, 1964"
+            ],
+            [
+                "Nie_Haisheng",
+                "nationality",
+                "People\u2019s_Republic_of_China"
+            ],
+            [
+                "Nie_Haisheng",
+                "occupation",
+                "fighter_pilot"
+            ],
+            [
+                "Nie_Haisheng",
+                "mission",
+                "Shenzhou_10_mission"
+            ],
+            [
+                "Nie_Haisheng",
+                "mission",
+                "Shenzhou_6_mission"
+            ]
+        ]
+    },
+    {
+        "index": 26,
+        "input_text": "Bionico is a food found in Mexico, in the region Jalisco. It is served as a dessert in the country, where the local currency is the peso.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bionico",
+                "cuisine",
+                "Mexico"
+            ],
+            [
+                "Bionico",
+                "location",
+                "Jalisco"
+            ],
+            [
+                "Bionico",
+                "type",
+                "Dessert"
+            ],
+            [
+                "Mexico",
+                "currency",
+                "Peso"
+            ]
+        ],
+        "schema_definition": {
+            "cuisine": "The subject entity is a part of the cuisine of the place specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "type": "The subject entity is a type of the object entity.",
+            "currency": "The object entity is the currency of the subject entity."
+        },
+        "canonicalization_candidates": "[{}, {'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bionico",
+                "cuisine",
+                "Mexico"
+            ],
+            [
+                "Bionico",
+                "located in the administrative territorial entity",
+                "Jalisco"
+            ],
+            [
+                "Bionico",
+                "type",
+                "Dessert"
+            ],
+            [
+                "Mexico",
+                "currency",
+                "Peso"
+            ]
+        ]
+    },
+    {
+        "index": 27,
+        "input_text": "GMA New Media is located in the GMA Network Center in the Philippines. Their main product is online games but they also produce web services.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "GMA_New_Media",
+                "location",
+                "GMA_Network_Center"
+            ],
+            [
+                "GMA_Network_Center",
+                "location",
+                "Philippines"
+            ],
+            [
+                "GMA_New_Media",
+                "product",
+                "Online_games"
+            ],
+            [
+                "GMA_New_Media",
+                "product",
+                "Web_services"
+            ]
+        ],
+        "schema_definition": {
+            "product": "The subject entity produces or provides the product specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "GMA_New_Media",
+                "located in the administrative territorial entity",
+                "GMA_Network_Center"
+            ],
+            [
+                "GMA_Network_Center",
+                "located in the administrative territorial entity",
+                "Philippines"
+            ],
+            [
+                "GMA_New_Media",
+                "product",
+                "Online_games"
+            ],
+            [
+                "GMA_New_Media",
+                "product",
+                "Web_services"
+            ]
+        ]
+    },
+    {
+        "index": 28,
+        "input_text": "Abraham A. Ribicoff was born in New Britain, Connecticut and was a US citizen. He was married to Ruth Ribicoff and was in office at the same time as the presidency of John F. Kennedy. He died in the United States.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Abraham_A._Ribicoff",
+                "bornIn",
+                "New_Britain,_Connecticut"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "nationality",
+                "US_citizen"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "spouse",
+                "Ruth_Ribicoff"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "wasInOfficeDuring",
+                "Presidency_of_John_F._Kennedy"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "diedIn",
+                "United_States"
+            ]
+        ],
+        "schema_definition": {
+            "bornIn": "The subject entity was born in the location specified by the object entity.",
+            "nationality": "The subject entity has the nationality specified by the object entity.",
+            "spouse": "The subject entity is married to the person specified by the object entity.",
+            "wasInOfficeDuring": "The subject entity was in office during the time period or event specified by the object entity.",
+            "diedIn": "The subject entity died in the location specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'place of birth': np.float64(1.0000000205114885), 'date of birth': np.float64(0.8953617101727599), 'creator': np.float64(0.8870590006293767), 'start time': np.float64(0.8729783385652263), 'located in the administrative territorial entity': np.float64(0.8684469418520012)}, {}, {'manager': np.float64(0.840111290657678), 'owner': np.float64(0.8305241328531476), 'occupation': np.float64(0.8285237765705008), 'operator': np.float64(0.8280449077365014), 'type': np.float64(0.8277949290817663)}, {'start time': np.float64(0.848342566848734), 'foundingDate': np.float64(0.8365309416379396), 'yearOfConstruction': np.float64(0.8227075572963681), 'creator': np.float64(0.8194487925332322), 'date of birth': np.float64(0.8129857229459487)}, {'place of death': np.float64(0.9999999940723618), 'date of death': np.float64(0.9053482157258045), 'place of birth': np.float64(0.8047177650936223), 'located in the administrative territorial entity': np.float64(0.7763343290773883), 'broadcaster': np.float64(0.7712710520679709)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Abraham_A._Ribicoff",
+                "place of birth",
+                "New_Britain,_Connecticut"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "nationality",
+                "US_citizen"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "spouse",
+                "Ruth_Ribicoff"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "wasInOfficeDuring",
+                "Presidency_of_John_F._Kennedy"
+            ],
+            [
+                "Abraham_A._Ribicoff",
+                "place of death",
+                "United_States"
+            ]
+        ]
+    },
+    {
+        "index": 29,
+        "input_text": "Hypermarcas, founded on January 1, 2001, is located in Brazil. Hypermarcas is a type of S.A, and is managed by their CEO.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Hypermarcas",
+                "founded",
+                "2001-01-01"
+            ],
+            [
+                "Hypermarcas",
+                "location",
+                "Brazil"
+            ],
+            [
+                "Hypermarcas",
+                "type",
+                "S.A"
+            ],
+            [
+                "Hypermarcas",
+                "manager",
+                "CEO"
+            ]
+        ],
+        "schema_definition": {
+            "founded": "The subject entity was established or founded on the date specified by the object entity.",
+            "location": "The subject entity is located in the place specified by the object entity.",
+            "type": "The subject entity is of the type specified by the object entity.",
+            "manager": "The subject entity is managed by the person or entity specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'foundingDate': np.float64(1.0000000392393804), 'date of birth': np.float64(0.9189732250344892), 'start time': np.float64(0.9082455248141192), 'yearOfConstruction': np.float64(0.8897191049962552), 'firstAired': np.float64(0.880414738639864)}, {'located in the administrative territorial entity': np.float64(0.9374531582043559), 'country': np.float64(0.913278419131847), 'address': np.float64(0.9111611202770977), 'place of birth': np.float64(0.9093464974501846), 'type': np.float64(0.90308587284954)}, {}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Hypermarcas",
+                "foundingDate",
+                "2001-01-01"
+            ],
+            [
+                "Hypermarcas",
+                "country",
+                "Brazil"
+            ],
+            [
+                "Hypermarcas",
+                "type",
+                "S.A"
+            ],
+            [
+                "Hypermarcas",
+                "manager",
+                "CEO"
+            ]
+        ]
+    },
+    {
+        "index": 30,
+        "input_text": "Aleksandr Prudnikov was born on the 24th February 1989.He is a member of the youth side of FC Spartak Moscow and is the FC Terek Grozny club.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Aleksandr_Prudnikov",
+                "dateOfBirth",
+                "1989-02-24"
+            ],
+            [
+                "Aleksandr_Prudnikov",
+                "memberOf",
+                "FC_Spartak_Moscow"
+            ],
+            [
+                "Aleksandr_Prudnikov",
+                "club",
+                "FC_Terek_Grozny"
+            ]
+        ],
+        "schema_definition": {
+            "dateOfBirth": "The subject entity was born on the date specified by the object entity.",
+            "memberOf": "The subject entity is a member of the organization specified by the object entity.",
+            "club": "The subject entity is associated with the club specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'date of birth': np.float64(0.9999998737012223), 'foundingDate': np.float64(0.9189732250344891), 'place of birth': np.float64(0.8953617101727599), 'firstAired': np.float64(0.8682471675188641), 'start time': np.float64(0.8654385429150397)}, {'employer': np.float64(0.9549044988542391), 'affiliatedWith': np.float64(0.9498681633869042), 'operator': np.float64(0.9114461732053741), 'type': np.float64(0.9112586710987682), 'owner': np.float64(0.9014391598864824)}, {'affiliatedWith': np.float64(0.8786435565348583), 'type': np.float64(0.8605412023697749), 'employer': np.float64(0.8569507792045896), 'operator': np.float64(0.8552601064794243), 'owner': np.float64(0.8472679565240322)}]",
+        "schema_canonicalizaiton": [
+            [
+                "Aleksandr_Prudnikov",
+                "date of birth",
+                "1989-02-24"
+            ],
+            [
+                "Aleksandr_Prudnikov",
+                "affiliatedWith",
+                "FC_Spartak_Moscow"
+            ],
+            [
+                "Aleksandr_Prudnikov",
+                "affiliatedWith",
+                "FC_Terek_Grozny"
+            ]
+        ]
+    },
+    {
+        "index": 31,
+        "input_text": "Ciudad Ayala is a city, in Mexico. Its population in the metropolitan area is 1777539 and the population density is 1604. The goverment type is council-manager and its leader title is city manager.\n",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Ciudad_Ayala",
+                "type",
+                "City"
+            ],
+            [
+                "Ciudad_Ayala",
+                "country",
+                "Mexico"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationMetro",
+                "1777539"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationDensity",
+                "1604"
+            ],
+            [
+                "Ciudad_Ayala",
+                "governmentType",
+                "Council-manager"
+            ],
+            [
+                "Ciudad_Ayala",
+                "leaderTitle",
+                "City_manager"
+            ]
+        ],
+        "schema_definition": {
+            "type": "The subject entity is of the type specified by the object entity.",
+            "country": "The subject entity is located in the country specified by the object entity.",
+            "populationMetro": "The subject entity has a metropolitan population of the number specified by the object entity.",
+            "populationDensity": "The subject entity has a population density of the number specified by the object entity.",
+            "governmentType": "The subject entity has the type of government specified by the object entity.",
+            "leaderTitle": "The subject entity has a leader with the title specified by the object entity."
+        },
+        "canonicalization_candidates": "[{}, {}, {}, {}, {'type': np.float64(0.8969222585273433), 'contains administrative territorial entity': np.float64(0.8799510540136484), 'powerType': np.float64(0.8773150385495001), 'operator': np.float64(0.8670336560292353), 'owner': np.float64(0.855140090006308)}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Ciudad_Ayala",
+                "type",
+                "City"
+            ],
+            [
+                "Ciudad_Ayala",
+                "country",
+                "Mexico"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationMetro",
+                "1777539"
+            ],
+            [
+                "Ciudad_Ayala",
+                "populationDensity",
+                "1604"
+            ],
+            [
+                "Ciudad_Ayala",
+                "type",
+                "Council-manager"
+            ],
+            [
+                "Ciudad_Ayala",
+                "leaderTitle",
+                "City_manager"
+            ]
+        ]
+    },
+    {
+        "index": 32,
+        "input_text": "Bananaman, first aired on 3rd October 1983, is broadcasted by STV.",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "Bananaman",
+                "firstAired",
+                "1983-10-03"
+            ],
+            [
+                "Bananaman",
+                "broadcaster",
+                "STV"
+            ]
+        ],
+        "schema_definition": {
+            "firstAired": "The subject entity was first broadcasted or aired on the date specified by the object entity.",
+            "broadcaster": "The subject entity is broadcasted by the entity specified by the object entity."
+        },
+        "canonicalization_candidates": "[{}, {}]",
+        "schema_canonicalizaiton": [
+            [
+                "Bananaman",
+                "firstAired",
+                "1983-10-03"
+            ],
+            [
+                "Bananaman",
+                "broadcaster",
+                "STV"
+            ]
+        ]
+    }
+]

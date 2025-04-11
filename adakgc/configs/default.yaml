@@ -1,0 +1,60 @@
+# AdaKGC Default Configuration
+
+# Data settings
+data:
+  input_path: "data/raw/webnlg_triplex.json"
+  schema_path: "data/schema/webnlg_schema.csv"
+  output_dir: "data/processed"
+  cache_dir: "data/cache"
+
+# Pipeline settings
+pipeline:
+  batch_size: 50
+  similarity_threshold: 0.85
+  max_iterations: 1
+
+# Models
+models:
+  # Extract settings
+  extractor:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    prompt_template_path: null  # Use default
+    few_shot_examples_path: null  # Use default
+    max_tokens: 1024
+    temperature: 0.1
+  
+  # Define settings
+  definer:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    prompt_template_path: null  # Use default
+    few_shot_examples_path: null  # Use default
+    max_tokens: 512
+    temperature: 0.1
+  
+  # Canonicalize settings
+  canonicalizer:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    embedder_name: "intfloat/e5-mistral-7b-instruct"
+    prompt_template_path: null  # Use default
+    similarity_threshold: 0.85
+    max_tokens: 512
+    temperature: 0.1
+  
+  # Similarity calculator settings
+  similarity:
+    embedder_name: "intfloat/e5-mistral-7b-instruct"
+    cache_dir: "data/embeddings"
+    use_gpu: true
+  
+  # Clustering settings
+  clustering:
+    similarity_threshold: 0.85
+    min_cluster_size: 2
+    max_cluster_size: 20
+
+# Logging settings
+logging:
+  level: "INFO"
+  log_file: "logs/adakgc.log"
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S" 

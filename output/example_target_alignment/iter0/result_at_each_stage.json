@@ -1,0 +1,65 @@
+[
+    {
+        "index": 0,
+        "input_text": "John Doe is a dedicated student at the National University of Singapore. He currently pursuing a degree in Computer Science. Known among his peers for his curiosity and problem-solving skills. John spends much of his time exploring topics in artificial intelligence and machine learning. Outside the classroom, he actively participates in coding competitions, hackathons, and university tech clubs, always seeking new challenges to grow both personally and professionally. With a strong passion for innovation and a commitment to continuous learning, John aspires to contribute to cutting-edge technologies that make a meaningful impact on society.",
+        "entity_hint": "",
+        "relation_hint": "",
+        "oie": [
+            [
+                "John_Doe",
+                "studentAt",
+                "National_University_of_Singapore"
+            ],
+            [
+                "John_Doe",
+                "major",
+                "Computer_Science"
+            ],
+            [
+                "John_Doe",
+                "fieldOfInterest",
+                "Artificial_Intelligence"
+            ],
+            [
+                "John_Doe",
+                "fieldOfInterest",
+                "Machine_Learning"
+            ],
+            [
+                "John_Doe",
+                "participatesIn",
+                "Coding_Competitions"
+            ],
+            [
+                "John_Doe",
+                "participatesIn",
+                "Hackathons"
+            ],
+            [
+                "John_Doe",
+                "participatesIn",
+                "University_Tech_Clubs"
+            ]
+        ],
+        "schema_definition": {
+            "studentAt": "The subject entity is a student at the educational institution specified by the object entity.",
+            "major": "The subject entity's major field of study is specified by the object entity.",
+            "fieldOfInterest": "The subject entity has an interest in the field specified by the object entity.",
+            "participatesIn": "The subject entity actively takes part in the event or organization specified by the object entity."
+        },
+        "canonicalization_candidates": "[{'student': np.float64(0.8774385924334345), 'located in the administrative territorial entity': np.float64(0.8358192630806666), 'contains administrative territorial entity': np.float64(0.8307806978092434), 'country': np.float64(0.8116645673913472), 'place of birth': np.float64(0.8051302416073445)}, {'contains administrative territorial entity': np.float64(0.8250843951561847), 'located in the administrative territorial entity': np.float64(0.8182395184893698), 'student': np.float64(0.8083411007836981), 'country': np.float64(0.8012776431321338), 'start time': np.float64(0.7899536524550517)}, {'located in the administrative territorial entity': np.float64(0.8329823297475552), 'country': np.float64(0.8277172404842779), 'contains administrative territorial entity': np.float64(0.8250832173573535), 'place of birth': np.float64(0.8164472160400644), 'start time': np.float64(0.8142599960332086)}, {'located in the administrative territorial entity': np.float64(0.8329823297475552), 'country': np.float64(0.8277172404842779), 'contains administrative territorial entity': np.float64(0.8250832173573535), 'place of birth': np.float64(0.8164472160400644), 'start time': np.float64(0.8142599960332086)}, {'start time': np.float64(0.7935850249836716), 'located in the administrative territorial entity': np.float64(0.7832018016248377), 'contains administrative territorial entity': np.float64(0.7776992276510434), 'place of birth': np.float64(0.7595194092214832), 'country': np.float64(0.7508768101917924)}, {'start time': np.float64(0.7935850249836716), 'located in the administrative territorial entity': np.float64(0.7832018016248377), 'contains administrative territorial entity': np.float64(0.7776992276510434), 'place of birth': np.float64(0.7595194092214832), 'country': np.float64(0.7508768101917924)}, {'start time': np.float64(0.7935850249836716), 'located in the administrative territorial entity': np.float64(0.7832018016248377), 'contains administrative territorial entity': np.float64(0.7776992276510434), 'place of birth': np.float64(0.7595194092214832), 'country': np.float64(0.7508768101917924)}]",
+        "schema_canonicalizaiton": [
+            [
+                "John_Doe",
+                "student",
+                "National_University_of_Singapore"
+            ],
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    }
+]
