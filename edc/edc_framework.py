@@ -18,6 +18,9 @@ from sentence_transformers import SentenceTransformer
 from importlib import reload
 import random
 import json
+import concurrent.futures
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import math
 
 reload(logging)
 logger = logging.getLogger(__name__)
@@ -55,6 +58,11 @@ class EDC:
 
         self.initial_schema_path = edc_configuration["target_schema_path"]
         self.enrich_schema = edc_configuration["enrich_schema"]
+        
+        # Concurrency settings
+        self.batch_size = edc_configuration.get("batch_size", 5)  # Default batch size of 5
+        self.max_workers = edc_configuration.get("max_workers", 5)  # Default max workers of 5
+        self.use_batch_processing = edc_configuration.get("use_batch_processing", False)  # Disabled by default
 
         if self.initial_schema_path is not None:
             reader = csv.reader(open(self.initial_schema_path, "r"))
@@ -75,6 +83,8 @@ class EDC:
         logging.basicConfig(level=edc_configuration["loglevel"])
 
         logger.info(f"Model used: {self.needed_model_set}")
+        if self.use_batch_processing:
+            logger.info(f"Batch processing enabled with batch size: {self.batch_size}, max workers: {self.max_workers}")
 
     def oie(
         self, input_text_list: List[str], previous_extracted_triplets_list: List[List[str]] = None, free_model=False
@@ -82,16 +92,6 @@ class EDC:
         if not llm_utils.is_model_openai(self.oie_llm_name):
             # Load the HF model for OIE
             oie_model, oie_tokenizer = self.load_model(self.oie_llm_name, "hf")
-            # if self.oie_llm_name not in self.loaded_model_dict:
-            #     logger.info(f"Loading model {self.oie_llm_name}.")
-            #     oie_model, oie_tokenizer = (
-            #         AutoModelForCausalLM.from_pretrained(self.oie_llm_name, device_map="auto"),
-            #         AutoTokenizer.from_pretrained(self.oie_llm_name),
-            #     )
-            #     self.loaded_model_dict[self.oie_llm_name] = (oie_model, oie_tokenizer)
-            # else:
-            #     logger.info(f"Model {self.oie_llm_name} is already loaded, reusing it.")
-            #     oie_model, oie_tokenizer = self.loaded_model_dict[self.oie_llm_name]
             extractor = Extractor(oie_model, oie_tokenizer)
         else:
             extractor = Extractor(openai_model=self.oie_llm_name)
@@ -112,18 +112,30 @@ class EDC:
             )
 
             assert len(previous_extracted_triplets_list) == len(input_text_list)
-            for idx, input_text in enumerate(tqdm(input_text_list)):
-                input_text = input_text_list[idx]
-                entity_hint_str = entity_hint_list[idx]
-                relation_hint_str = relation_hint_list[idx]
-                refined_oie_triplets = extractor.extract(
-                    input_text,
-                    oie_refinement_few_shot_examples_str,
-                    oie_refinement_prompt_template_str,
-                    entity_hint_str,
-                    relation_hint_str,
+            
+            if self.use_batch_processing and llm_utils.is_model_openai(self.oie_llm_name):
+                # Process in batches for OpenAI models
+                oie_triples_list = self._batch_process_oie_with_hints(
+                    input_text_list, 
+                    entity_hint_list, 
+                    relation_hint_list, 
+                    oie_refinement_few_shot_examples_str, 
+                    oie_refinement_prompt_template_str
                 )
-                oie_triples_list.append(refined_oie_triplets)
+            else:
+                # Process sequentially
+                for idx, input_text in enumerate(tqdm(input_text_list)):
+                    input_text = input_text_list[idx]
+                    entity_hint_str = entity_hint_list[idx]
+                    relation_hint_str = relation_hint_list[idx]
+                    refined_oie_triplets = extractor.extract(
+                        input_text,
+                        oie_refinement_few_shot_examples_str,
+                        oie_refinement_prompt_template_str,
+                        entity_hint_str,
+                        relation_hint_str,
+                    )
+                    oie_triples_list.append(refined_oie_triplets)
         else:
             # Normal OIE
             entity_hint_list = ["" for _ in input_text_list]
@@ -131,11 +143,24 @@ class EDC:
             logger.info("Running OIE...")
             oie_few_shot_examples_str = open(self.oie_few_shot_example_file_path).read()
             oie_few_shot_prompt_template_str = open(self.oie_prompt_template_file_path).read()
-
-            for input_text in tqdm(input_text_list):
-                oie_triples = extractor.extract(input_text, oie_few_shot_examples_str, oie_few_shot_prompt_template_str)
-                oie_triples_list.append(oie_triples)
-                logger.debug(f"{input_text}\n -> {oie_triples}\n")
+            
+            if self.use_batch_processing and llm_utils.is_model_openai(self.oie_llm_name):
+                # Process in batches for OpenAI models
+                oie_triples_list = self._batch_process_oie(
+                    input_text_list, 
+                    oie_few_shot_examples_str, 
+                    oie_few_shot_prompt_template_str
+                )
+            else:
+                # Process sequentially
+                for input_text in tqdm(input_text_list):
+                    oie_triples = extractor.extract(
+                        input_text, 
+                        oie_few_shot_examples_str, 
+                        oie_few_shot_prompt_template_str
+                    )
+                    oie_triples_list.append(oie_triples)
+                    logger.debug(f"{input_text}\n -> {oie_triples}\n")
 
         logger.info("OIE finished.")
 
@@ -145,6 +170,149 @@ class EDC:
             del self.loaded_model_dict[self.oie_llm_name]
 
         return oie_triples_list, entity_hint_list, relation_hint_list
+    
+    def _batch_process_oie(self, input_text_list, few_shot_examples_str, prompt_template_str):
+        """Process OIE in batches for faster processing with OpenAI models"""
+        logger.info(f"Processing OIE in batches with batch size {self.batch_size}")
+        results = [None] * len(input_text_list)
+        
+        # Define the function to process a single item
+        def process_single_text(idx, text):
+            system_prompt = prompt_template_str
+            user_prompt = f"Text: {text}\n\nFew shot examples:\n{few_shot_examples_str}"
+            messages = [{"role": "user", "content": user_prompt}]
+            
+            response = llm_utils.openai_chat_completion_with_key(
+                model=self.oie_llm_name,
+                messages=messages,
+                system_prompt=system_prompt
+            )
+            
+            # Parse the response into triplets
+            triplets = []
+            try:
+                triplets_str = response.strip().split("\n")
+                for triplet_str in triplets_str:
+                    if triplet_str.strip():
+                        # Simple parsing - can be improved based on format
+                        if '[' in triplet_str and ']' in triplet_str:
+                            # Try to parse as a list
+                            try:
+                                triplet = eval(triplet_str)
+                                if isinstance(triplet, list) and len(triplet) == 3:
+                                    triplets.append(triplet)
+                            except:
+                                # Fallback to simple splitting
+                                triple_parts = triplet_str.strip('[]').split(',')
+                                if len(triple_parts) >= 3:
+                                    triplets.append([p.strip(' "\'') for p in triple_parts[:3]])
+                        else:
+                            # Try simple splitting
+                            triple_parts = triplet_str.split(',')
+                            if len(triple_parts) >= 3:
+                                triplets.append([p.strip(' "\'') for p in triple_parts[:3]])
+            except Exception as e:
+                logger.error(f"Error parsing triplets: {e}")
+            
+            return idx, triplets
+        
+        # Process in batches
+        num_batches = math.ceil(len(input_text_list) / self.batch_size)
+        for batch_idx in tqdm(range(num_batches), desc="OIE Batches"):
+            start_idx = batch_idx * self.batch_size
+            end_idx = min((batch_idx + 1) * self.batch_size, len(input_text_list))
+            batch_texts = input_text_list[start_idx:end_idx]
+            
+            # Process batch concurrently
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = [
+                    executor.submit(process_single_text, start_idx + i, text)
+                    for i, text in enumerate(batch_texts)
+                ]
+                
+                for future in as_completed(futures):
+                    try:
+                        idx, triplets = future.result()
+                        results[idx] = triplets
+                        logger.debug(f"Completed OIE for text {idx}")
+                    except Exception as e:
+                        logger.error(f"Error in OIE processing: {e}")
+        
+        return results
+    
+    def _batch_process_oie_with_hints(self, input_text_list, entity_hint_list, relation_hint_list, 
+                                     few_shot_examples_str, prompt_template_str):
+        """Process OIE with hints in batches for faster processing with OpenAI models"""
+        logger.info(f"Processing OIE with hints in batches with batch size {self.batch_size}")
+        results = [None] * len(input_text_list)
+        
+        # Define the function to process a single item
+        def process_single_text_with_hints(idx, text, entity_hint, relation_hint):
+            system_prompt = prompt_template_str
+            user_prompt = f"Text: {text}\n\nEntity hint: {entity_hint}\n\nRelation hint: {relation_hint}\n\nFew shot examples:\n{few_shot_examples_str}"
+            messages = [{"role": "user", "content": user_prompt}]
+            
+            response = llm_utils.openai_chat_completion_with_key(
+                model=self.oie_llm_name,
+                messages=messages,
+                system_prompt=system_prompt
+            )
+            
+            # Parse the response into triplets (same as in _batch_process_oie)
+            triplets = []
+            try:
+                triplets_str = response.strip().split("\n")
+                for triplet_str in triplets_str:
+                    if triplet_str.strip():
+                        if '[' in triplet_str and ']' in triplet_str:
+                            try:
+                                triplet = eval(triplet_str)
+                                if isinstance(triplet, list) and len(triplet) == 3:
+                                    triplets.append(triplet)
+                            except:
+                                triple_parts = triplet_str.strip('[]').split(',')
+                                if len(triple_parts) >= 3:
+                                    triplets.append([p.strip(' "\'') for p in triple_parts[:3]])
+                        else:
+                            triple_parts = triplet_str.split(',')
+                            if len(triple_parts) >= 3:
+                                triplets.append([p.strip(' "\'') for p in triple_parts[:3]])
+            except Exception as e:
+                logger.error(f"Error parsing triplets: {e}")
+            
+            return idx, triplets
+        
+        # Process in batches
+        num_batches = math.ceil(len(input_text_list) / self.batch_size)
+        for batch_idx in tqdm(range(num_batches), desc="OIE Batches with Hints"):
+            start_idx = batch_idx * self.batch_size
+            end_idx = min((batch_idx + 1) * self.batch_size, len(input_text_list))
+            batch_texts = input_text_list[start_idx:end_idx]
+            batch_entity_hints = entity_hint_list[start_idx:end_idx]
+            batch_relation_hints = relation_hint_list[start_idx:end_idx]
+            
+            # Process batch concurrently
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = [
+                    executor.submit(
+                        process_single_text_with_hints, 
+                        start_idx + i, 
+                        text, 
+                        batch_entity_hints[i], 
+                        batch_relation_hints[i]
+                    )
+                    for i, text in enumerate(batch_texts)
+                ]
+                
+                for future in as_completed(futures):
+                    try:
+                        idx, triplets = future.result()
+                        results[idx] = triplets
+                        logger.debug(f"Completed OIE with hints for text {idx}")
+                    except Exception as e:
+                        logger.error(f"Error in OIE with hints processing: {e}")
+        
+        return results
 
     def load_model(self, model_name, model_type):
         assert model_type in ["sts", "hf"]  # Either a sentence transformer or a huggingface LLM
@@ -163,48 +331,101 @@ class EDC:
                 self.loaded_model_dict[model_name] = model
         return self.loaded_model_dict[model_name]
 
-    def schema_definition(self, input_text_list: List[str], oie_triplets_list: List[List[str]], free_model=False):
-        assert len(input_text_list) == len(oie_triplets_list)
-
+    def schema_definition(self, triplets_list, free_model=False):
         if not llm_utils.is_model_openai(self.sd_llm_name):
             # Load the HF model for Schema Definition
             sd_model, sd_tokenizer = self.load_model(self.sd_llm_name, "hf")
-            # if self.sd_llm_name not in self.loaded_model_dict:
-            #     logger.info(f"Loading model {self.sd_llm_name}")
-            #     sd_model, sd_tokenizer = (
-            #         AutoModelForCausalLM.from_pretrained(self.sd_llm_name, device_map="auto"),
-            #         AutoTokenizer.from_pretrained(self.sd_llm_name),
-            #     )
-            #     self.loaded_model_dict[self.sd_llm_name] = (sd_model, sd_tokenizer)
-            #     logger.info(f"Loading model {self.sd_llm_name}.")
-            # else:
-            #     logger.info(f"Model {self.sd_llm_name} is already loaded, reusing it.")
-            #     sd_model, sd_tokenizer = self.loaded_model_dict[self.sd_llm_name]
             schema_definer = SchemaDefiner(model=sd_model, tokenizer=sd_tokenizer)
         else:
             schema_definer = SchemaDefiner(openai_model=self.sd_llm_name)
 
-        schema_definition_few_shot_prompt_template_str = open(self.sd_template_file_path).read()
-        schema_definition_few_shot_examples_str = open(self.sd_few_shot_example_file_path).read()
-        schema_definition_dict_list = []
-
         logger.info("Running Schema Definition...")
-        for idx, oie_triplets in enumerate(tqdm(oie_triplets_list)):
-            schema_definition_dict = schema_definer.define_schema(
-                input_text_list[idx],
-                oie_triplets,
-                schema_definition_few_shot_examples_str,
-                schema_definition_few_shot_prompt_template_str,
+        sd_few_shot_examples_str = open(self.sd_few_shot_example_file_path).read()
+        sd_template_str = open(self.sd_template_file_path).read()
+
+        # Flatten the triplets list
+        flat_triplets = [triplet for triplets in triplets_list for triplet in triplets]
+        unique_relations = set([triplet[1] for triplet in flat_triplets])
+        unique_relations = sorted(list(unique_relations))  # Sort for deterministic output
+
+        logger.info(f"Found {len(unique_relations)} unique relations: {unique_relations}")
+        relation_definition_dict = {}
+        
+        if self.use_batch_processing and llm_utils.is_model_openai(self.sd_llm_name):
+            # Process in batches for OpenAI models
+            relation_definition_dict = self._batch_process_schema_definition(
+                unique_relations, 
+                sd_few_shot_examples_str, 
+                sd_template_str
             )
-            schema_definition_dict_list.append(schema_definition_dict)
-            logger.debug(f"{input_text_list[idx]}, {oie_triplets}\n -> {schema_definition_dict}\n")
+        else:
+            # Process sequentially
+            for relation in tqdm(unique_relations):
+                definition = schema_definer.define(relation, sd_few_shot_examples_str, sd_template_str)
+                relation_definition_dict[relation] = definition
+                logger.debug(f"{relation} -> {definition}")
 
         logger.info("Schema Definition finished.")
+
         if free_model:
             logger.info(f"Freeing model {self.sd_llm_name} as it is no longer needed")
             llm_utils.free_model(sd_model, sd_tokenizer)
             del self.loaded_model_dict[self.sd_llm_name]
-        return schema_definition_dict_list
+
+        # Convert the single dictionary to a list of dictionaries, one per input text
+        sd_dict_list = []
+        for triplets in triplets_list:
+            text_relations = {triplet[1] for triplet in triplets}
+            text_dict = {rel: relation_definition_dict.get(rel, "") for rel in text_relations}
+            sd_dict_list.append(text_dict)
+        
+        return sd_dict_list
+    
+    def _batch_process_schema_definition(self, unique_relations, few_shot_examples_str, template_str):
+        """Process schema definition in batches for faster processing with OpenAI models"""
+        logger.info(f"Processing schema definition in batches with batch size {self.batch_size}")
+        results = {}
+        
+        # Define the function to process a single relation
+        def process_single_relation(relation):
+            system_prompt = template_str
+            user_prompt = f"Relation: {relation}\n\nFew shot examples:\n{few_shot_examples_str}"
+            messages = [{"role": "user", "content": user_prompt}]
+            
+            response = llm_utils.openai_chat_completion_with_key(
+                model=self.sd_llm_name,
+                messages=messages,
+                system_prompt=system_prompt
+            )
+            
+            # Extract the definition from the response
+            definition = response.strip()
+            
+            return relation, definition
+        
+        # Process in batches
+        num_batches = math.ceil(len(unique_relations) / self.batch_size)
+        for batch_idx in tqdm(range(num_batches), desc="Schema Definition Batches"):
+            start_idx = batch_idx * self.batch_size
+            end_idx = min((batch_idx + 1) * self.batch_size, len(unique_relations))
+            batch_relations = unique_relations[start_idx:end_idx]
+            
+            # Process batch concurrently
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = [
+                    executor.submit(process_single_relation, relation)
+                    for relation in batch_relations
+                ]
+                
+                for future in as_completed(futures):
+                    try:
+                        relation, definition = future.result()
+                        results[relation] = definition
+                        logger.debug(f"Completed schema definition for relation: {relation} -> {definition}")
+                    except Exception as e:
+                        logger.error(f"Error in schema definition processing: {e}")
+        
+        return results
 
     def schema_canonicalization(
         self,
@@ -458,7 +679,6 @@ class EDC:
 
             del required_model_dict_current_iteration["sd"]
             sd_dict_list = self.schema_definition(
-                input_text_list,
                 oie_triplets_list,
                 free_model=self.sd_llm_name not in required_model_dict_current_iteration.values()
                 and iteration == refinement_iterations,

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Script to set up multiple Gemini API keys in the .env file
+# Usage: ./set_api_keys.sh "key1" "key2" "key3" ...
+
+ENV_FILE=".env"
+
+# Create or clear the existing GEMINI API keys from .env
+grep -v "GEMINI_API_KEY" $ENV_FILE > temp_env || touch temp_env
+mv temp_env $ENV_FILE
+
+# Add the main key
+if [ -n "$1" ]; then
+    echo "GEMINI_API_KEY=$1" >> $ENV_FILE
+    echo "Added main GEMINI_API_KEY to $ENV_FILE"
+    shift
+else
+    echo "Error: Please provide at least one API key"
+    exit 1
+fi
+
+# Add additional keys with numbering
+count=1
+for key in "$@"; do
+    echo "GEMINI_API_KEY_${count}=$key" >> $ENV_FILE
+    echo "Added GEMINI_API_KEY_${count} to $ENV_FILE"
+    count=$((count+1))
+done
+
+echo "API keys have been successfully set in $ENV_FILE"
+echo "Total keys: $count"
+
+# Make sure the file has proper permissions
+chmod 600 $ENV_FILE 

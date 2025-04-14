@@ -7,3 +7,5 @@ pydantic
 uvicorn
 networkx
 matplotlib
+openai
+python-dotenv

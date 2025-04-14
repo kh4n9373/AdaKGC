@@ -17,6 +17,43 @@ class SchemaDefiner:
         self.tokenizer = tokenizer
         self.openai_model = openai_model
 
+    def define(
+        self,
+        relation: str,
+        few_shot_examples_str: str,
+        prompt_template_str: str,
+    ) -> str:
+        """
+        Define a single relation.
+        This method is used for batch processing of schema definitions.
+        
+        Args:
+            relation: The relation to define
+            few_shot_examples_str: Examples to guide the definition
+            prompt_template_str: The prompt template for schema definition
+            
+        Returns:
+            A string containing the definition of the relation
+        """
+        # Create a simplified prompt for defining a single relation
+        user_prompt = f"Relation: {relation}\n\nFew shot examples:\n{few_shot_examples_str}"
+        messages = [{"role": "user", "content": user_prompt}]
+        
+        if self.openai_model is None:
+            completion = llm_utils.generate_completion_transformers(
+                messages, self.model, self.tokenizer, answer_prepend="Answer: "
+            )
+        else:
+            # Use the prompt template as system prompt for OpenAI
+            completion = llm_utils.openai_chat_completion(
+                self.openai_model, 
+                prompt_template_str, 
+                messages
+            )
+        
+        # Return just the definition as a string
+        return completion.strip()
+        
     def define_schema(
         self,
         input_text_str: str,

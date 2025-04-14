@@ -2,12 +2,38 @@ from argparse import ArgumentParser
 from edc.edc_framework import EDC
 import os
 import logging
+import random
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+def select_lines_from_file(file_path, randomize=False, no_lines=None):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            all_lines = [line.strip() for line in file if line.strip()]
+            
+        if no_lines is None or no_lines >= len(all_lines):
+            return all_lines
+        
+        if randomize:
+            selected_lines = random.sample(all_lines, no_lines)
+        else:
+            selected_lines = all_lines[:no_lines]
+            
+        return selected_lines
+    except Exception as e:
+        print(f"Error reading file {file_path}: {e}")
+        return []
+
+def generate_input_file_path(source_path, randomize, no_lines):
+    source_basename = os.path.splitext(os.path.basename(source_path))[0]
+    
+    if randomize:
+        return f"./dataset_{source_basename}_random_{no_lines}.txt"
+    else:
+        return f"./dataset_{source_basename}_sequential_{no_lines}.txt"
+
 if __name__ == "__main__":
     parser = ArgumentParser()
-    # OIE module setting
     parser.add_argument(
         "--oie_llm", default="mistralai/Mistral-7B-Instruct-v0.2", help="LLM used for open information extraction."
     )
@@ -22,7 +48,6 @@ if __name__ == "__main__":
         help="Few shot examples used for open information extraction.",
     )
 
-    # Schema Definition setting
     parser.add_argument(
         "--sd_llm", default="mistralai/Mistral-7B-Instruct-v0.2", help="LLM used for schema definition."
     )
@@ -37,7 +62,6 @@ if __name__ == "__main__":
         help="Few shot examples used for schema definition.",
     )
 
-    # Schema Canonicalization setting
     parser.add_argument(
         "--sc_llm",
         default="mistralai/Mistral-7B-Instruct-v0.2",
@@ -52,7 +76,6 @@ if __name__ == "__main__":
         help="Prompt template used for schema canonicalization verification.",
     )
 
-    # Refinement setting
     parser.add_argument("--sr_adapter_path", default=None, help="Path to adapter of schema retriever.")
     parser.add_argument(
         "--sr_embedder", default="intfloat/e5-mistral-7b-instruct", help="Embedding model used for schema retriever. Has to be a sentence transformer. Please refer to https://sbert.net/"
@@ -86,11 +109,26 @@ if __name__ == "__main__":
         help="Prompt template used for entity merging.",
     )
 
-    # Input setting
     parser.add_argument(
         "--input_text_file_path",
-        default="./datasets/example.txt",
-        help="File containing input texts to extract KG from, each line contains one piece of text.",
+        default=None,
+        help="Optional: File containing input texts to extract KG from. If not provided, will be generated from source_dataset_path.",
+    )
+    parser.add_argument(
+        "--source_dataset_path",
+        default=None,
+        help="Path to the source dataset file (e.g., webnlg.txt) for line selection.",
+    )
+    parser.add_argument(
+        "--randomize",
+        action="store_true",
+        help="Whether to randomly select lines from source dataset.",
+    )
+    parser.add_argument(
+        "--no_lines",
+        type=int,
+        default=None,
+        help="Number of lines to select from source dataset.",
     )
     parser.add_argument(
         "--target_schema_path",
@@ -103,17 +141,68 @@ if __name__ == "__main__":
         action="store_true",
         help="Whether un-canonicalizable relations should be added to the schema.",
     )
+    parser.add_argument(
+        "--suffle",
+        action="store_true",
+        help="Whether to shuffle the input text lines before processing.",
+    )
+    parser.add_argument(
+        "--extraction_length", 
+        type=int, 
+        default=None, 
+        help="Number of texts to extract triplets from."
+    )
+    parser.add_argument(
+        "--schema_length", 
+        type=int, 
+        default=None, 
+        help="Number of schemas to extract."
+    )
+    parser.add_argument(
+        "--embedding_threshold", 
+        type=float, 
+        default=0.7, 
+        help="Threshold for embedding similarity in schema canonicalization."
+    )
 
-    # Output setting
     parser.add_argument("--output_dir", default="./output/tmp", help="Directory to output to.")
     parser.add_argument("--logging_verbose", action="store_const", dest="loglevel", const=logging.INFO)
     parser.add_argument("--logging_debug", action="store_const", dest="loglevel", const=logging.DEBUG)
 
     args = parser.parse_args()
     args = vars(args)
+    
+    if args["source_dataset_path"] and args["no_lines"]:
+        print(f"Selecting {args['no_lines']} lines from {args['source_dataset_path']}")
+        print(f"Randomize: {args['randomize']}")
+        
+        selected_lines = select_lines_from_file(
+            args["source_dataset_path"], 
+            randomize=args["randomize"], 
+            no_lines=args["no_lines"]
+        )
+        
+        if not args["input_text_file_path"]:
+            args["input_text_file_path"] = generate_input_file_path(
+                args["source_dataset_path"],
+                args["randomize"],
+                args["no_lines"]
+            )
+        
+        temp_file_path = args["input_text_file_path"]
+        with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
+            for line in selected_lines:
+                temp_file.write(line + '\n')
+        
+        print(f"Created input file with {len(selected_lines)} lines at {temp_file_path}")
+        
+        if args["output_dir"] == "./output/tmp" and not args.get("input_text_file_path_provided", False):
+            output_dir_name = os.path.splitext(os.path.basename(temp_file_path))[0]
+            args["output_dir"] = f"./output/{output_dir_name}_alignment"
+            print(f"Using auto-generated output directory: {args['output_dir']}")
+    
     edc = EDC(**args)
     
-
     input_text_list = open(args["input_text_file_path"], "r").readlines()
     output_kg = edc.extract_kg(
         input_text_list,
